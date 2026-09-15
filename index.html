@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2 anos e 9 meses — a nossa órbita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #0a0e27;
+    --void-2: #12173a;
+    --void-3: #1a2050;
+    --rose: #eeb2c6;
+    --rose-soft: #f3c8d6;
+    --lavender: #b8a8e6;
+    --gold: #f0d9a8;
+    --ink: #f4f1f8;
+    --ink-dim: #a7abcf;
+    --line: rgba(244,241,248,0.14);
+  }
+ 
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+ 
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+ 
+  .serif{ font-family:'Cormorant Garamond', serif; }
+ 
+  /* ---------- ambient starfield ---------- */
+  #stars{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+  }
+  #stars span{
+    position:absolute; display:block; border-radius:50%;
+    background:var(--ink);
+    animation: twinkle 5s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%, 100%{ opacity:.15; }
+    50%{ opacity:.85; }
+  }
+ 
+  .nebula{
+    position:fixed; inset:-10%; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(38% 32% at 18% 22%, rgba(184,168,230,0.16), transparent 60%),
+      radial-gradient(46% 38% at 82% 68%, rgba(238,178,198,0.13), transparent 60%),
+      radial-gradient(30% 26% at 60% 12%, rgba(240,217,168,0.08), transparent 60%);
+    filter: blur(6px);
+  }
+ 
+  main{ position:relative; z-index:1; }
+ 
+  /* ---------- shared section rhythm ---------- */
+  section{
+    position:relative;
+    padding: clamp(4rem, 12vw, 9rem) clamp(1.5rem, 6vw, 6rem);
+  }
+ 
+  .veil{ position:relative; z-index:1; }
+ 
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding: 2rem;
+  }
+  .hero-ring{
+    position:relative;
+    width:min(70vw, 380px); aspect-ratio:1;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 1.5rem;
+  }
+  .hero-ring svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .hero-ring .orbit-path{
+    fill:none; stroke: var(--line); stroke-width:1;
+  }
+  .hero-ring .orbit-dot{
+    fill: var(--rose);
+    filter: drop-shadow(0 0 6px var(--rose));
+    animation: orbit 14s linear infinite;
+    transform-origin: 100px 100px;
+  }
+  @keyframes orbit{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+  }
+  .hero-kicker{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    color: var(--ink-dim);
+    text-transform: lowercase;
+    margin: 0 0 0.6rem;
+  }
+  .hero h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size: clamp(2.6rem, 8vw, 5.2rem);
+    line-height:1.05;
+    margin: 0;
+    background: linear-gradient(120deg, var(--ink) 20%, var(--rose-soft) 55%, var(--lavender) 85%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lede{
+    max-width: 34ch;
+    color: var(--ink-dim);
+    font-size: 1.02rem;
+    line-height:1.7;
+    margin-top: 1.4rem;
+  }
+  .hero .scroll-cue{
+    margin-top: 3.5rem;
+    font-size: 0.7rem;
+    letter-spacing:0.2em;
+    color: var(--ink-dim);
+    display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+  }
+  .scroll-cue .stem{
+    width:1px; height:34px;
+    background: linear-gradient(var(--rose), transparent);
+    animation: stem 2.4s ease-in-out infinite;
+  }
+  @keyframes stem{
+    0%,100%{ opacity:.3; }
+    50%{ opacity:1; }
+  }
+ 
+  /* ---------- chapters ---------- */
+  .chapter{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items:center;
+  }
+  @media(min-width: 860px){
+    .chapter{ grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); }
+    .chapter.reverse .chapter-figure{ order:2; }
+    .chapter.reverse .chapter-copy{ order:1; }
+  }
+ 
+  .chapter-figure{
+    position:relative;
+    border-radius: 2px;
+  }
+  .chapter-figure .frame{
+    position:relative;
+    overflow:hidden;
+    border-radius: 3px;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,0.7);
+  }
+  .chapter-figure img{
+    display:block; width:100%; height:100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.94) contrast(1.02);
+  }
+  .chapter-figure .frame::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(155deg, rgba(238,178,198,0.14), transparent 40%);
+    mix-blend-mode: screen;
+  }
+  .chapter-figure .glow{
+    position:absolute; width:60%; height:60%;
+    background: radial-gradient(circle, rgba(184,168,230,0.35), transparent 70%);
+    filter: blur(30px);
+    z-index:-1;
+    border-radius:50%;
+  }
+  .chapter:nth-child(odd) .glow{ top:-10%; left:-10%; }
+  .chapter:nth-child(even) .glow{ bottom:-10%; right:-10%; }
+ 
+  .chapter-copy .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 0.78rem;
+    color: var(--rose-soft);
+    letter-spacing: 0.14em;
+    display:flex; align-items:center; gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .chapter-copy .num::after{
+    content:"";
+    height:1px; width: 46px;
+    background: linear-gradient(90deg, var(--rose-soft), transparent);
+  }
+  .chapter-copy h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    margin: 0 0 1rem;
+    color: var(--ink);
+  }
+  .chapter-copy p{
+    font-size: 1rem;
+    line-height:1.8;
+    color: var(--ink-dim);
+    max-width: 46ch;
+  }
+  .chapter-copy .date{
+    display:inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--ink-dim);
+    opacity:0.7;
+  }
+ 
+  /* scroll reveal */
+  .reveal{
+    opacity:0; transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.is-visible{
+    opacity:1; transform: translateY(0);
+  }
+ 
+  /* ---------- divider constellation ---------- */
+  .constellation{
+    display:flex; align-items:center; justify-content:center;
+    gap: 1rem;
+    padding: 1rem 0 0;
+    color: var(--ink-dim);
+  }
+  .constellation .dot{
+    width:5px; height:5px; border-radius:50%;
+    background: var(--rose-soft);
+    box-shadow: 0 0 8px var(--rose-soft);
+  }
+  .constellation .line{
+    width:70px; height:1px;
+    background: var(--line);
+  }
+ 
+  /* ---------- closing letter ---------- */
+  .letter{
+    max-width: 700px;
+    margin: 0 auto;
+    text-align:center;
+    position:relative;
+  }
+  .letter .num{
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--rose-soft);
+    margin-bottom: 1.4rem;
+    display:block;
+  }
+  .letter h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    margin: 0 0 2rem;
+    line-height:1.15;
+  }
+  .letter p{
+    font-family:'Cormorant Garamond', serif;
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    line-height:1.9;
+    color: var(--ink);
+    font-style: italic;
+    margin: 0 0 1.4rem;
+  }
+  .letter .sign{
+    margin-top: 2.6rem;
+    font-family:'Space Grotesk', sans-serif;
+    font-style:normal;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .letter .heart{
+    display:inline-block;
+    margin-top: 2.2rem;
+    width: 26px; height:26px;
+    color: var(--rose);
+  }
+ 
+  footer{
+    text-align:center;
+    padding: 3rem 1.5rem 4rem;
+    color: var(--ink-dim);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    position:relative; z-index:1;
+  }
+ 
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="nebula"></div>
+<div id="stars"></div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero veil">
+    <div class="hero-ring">
+      <svg viewBox="0 0 200 200">
+        <ellipse class="orbit-path" cx="100" cy="100" rx="92" ry="60" transform="rotate(-18 100 100)"/>
+        <g class="orbit-dot" style="transform-origin:100px 100px;">
+          <circle cx="100" cy="40" r="4" transform="rotate(-18 100 100)"/>
+        </g>
+      </svg>
+    </div>
+    <p class="hero-kicker">uma órbita de dois</p>
+    <h1>2 anos<br>e 9 meses</h1>
+    <p class="lede serif" style="font-style:italic;">Um tanto de tempo, um tanto de nós com algumas recordações únicas</p>
+    <div class="scroll-cue">
+      <span>role para ler</span>
+      <span class="stem"></span>
+    </div>
+  </section>
+
+  <!-- CHAPTER 01 -->
+  <section>
+    <div class="chapter reveal">
+      <div class="chapter-figure">
+        <div class="glow"></div>
+        <div class="frame"><img src="img/niver.jpg" ></div>
+      </div>
+      <div class="chapter-copy">
+        <span class="num">01 · Meu Niver</span>
+        <h2 class="serif">O dia que comemos de montão</h2>
+        <p>Amo essa foto pois mostra nossa união e alegria em um momento tão especial. Esse dia foi meu aniversário e você estava ali, e como sempre, você estava maravilhosa</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="constellation reveal"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <!-- CHAPTER 02 -->
+  <section>
+    <div class="chapter reverse reveal">
+      <div class="chapter-figure">
+        <div class="glow"></div>
+        <div class="frame"><img src="img/coreia.png" alt="Selfie próxima, os dois deitados de rosto colado"></div>
+      </div>
+      <div class="chapter-copy">
+        <span class="num">02 · Evento da Coreia</span>
+        <h2 class="serif">Evento Coreano</h2>
+        <p>Neste evento, você me mostrou que a cultura coreana é tão rica quanto a nossa conexão. Cada momento foi uma nova descoberta, e também foi o dia que conhecemos o ALIGATÔ GOZAIMASUUU(namorado da isabela)</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="constellation reveal"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <!-- CHAPTER 03 -->
+  <section>
+    <div class="chapter reveal">
+      <div class="chapter-figure">
+        <div class="glow"></div>
+        <div class="frame"><img src="img/diego.jpg" alt="Os dois arrumados, abraçados numa noite especial"></div>
+      </div>
+      <div class="chapter-copy">
+        <span class="num">03 · Na casa do Diego</span>
+        <h2 class="serif">A seção de fotos</h2>
+        <p>Amo essa foto pois mostra o quão explendida você é em cada momento. Seu olhar tem o poder de iluminar até os dias mais sombrios. Seu sorriso é a melhor parte do dia. Seu cheiro é o que me faz sentir em casa.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="constellation reveal"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <!-- CHAPTER 04 -->
+  <section>
+    <div class="chapter reverse reveal">
+      <div class="chapter-figure">
+        <div class="glow"></div>
+        <div class="frame"><img src="img/carro.jpg" alt="Os dois abraçados sob um teto de lanternas coloridas"></div>
+      </div>
+      <div class="chapter-copy">
+        <p>Ainda nessa seção de fotos, tiramos essa foto, que representa mais um dos momentos mais adoráveis pois representa nosso futuro juntos.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="constellation reveal"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <!-- CHAPTER 05 -->
+  <section>
+    <div class="chapter reveal">
+      <div class="chapter-figure">
+        <div class="glow"></div>
+        <div class="frame"><img src="img/praia.jpg" alt="Os dois de costas, andando de mãos dadas à noite"></div>
+      </div>
+      <div class="chapter-copy">
+        <span class="num">05 · Na Praia</span>
+        <h2 class="serif">O dia do Aquário</h2>
+        <p>Esse dia foi especial porque foi a segunda vez em que fomos juntos na praia, e a sensação de estar ali, com você, foi incrível. Ainda mais de irmos juntos sozinhos no aquário conhecer os bixinhos e até mesmo PINGUINS</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="constellation reveal"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <!-- CHAPTER 06 -->
+  <section>
+    <div class="chapter reverse reveal">
+      <div class="chapter-figure">
+        <div class="glow"></div>
+        <div class="frame"><img src="img/evento.jpg" alt="Os dois se beijando em um mirante, com a paisagem ao fundo"></div>
+      </div>
+      <div class="chapter-copy">
+        <span class="num">06 · Evento de Flores e Morangos</span>
+        <h2 class="serif">A foto que nos marca</h2>
+        <p>Essa foto me marca porque captura o momento em que percebi o quanto você é importante para mim. O sorriso no seu rosto, a luz nos seus olhos tudo nela me lembra do amor que compartilhamos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section>
+    <div class="letter reveal">
+      <span class="num">carta</span>
+      <h2 class="serif">Obrigado por<br>esse tanto de tempo</h2>
+      <p>Obrigado por cada dia que somou até estes 2 anos e 9 meses. Por transformar paixão em cuidado, e cuidado em rotina, aquela que a gente escolhe viver todo dia.</p>
+      <p>Obrigado pelos altos, que comemoramos juntos, e pelos baixos, que atravessamos sem largar a mão um do outro. A gente sempre encontrou um jeito de se resolver e isso, pra mim, vale mais que qualquer perfeição.</p>
+      <p>Que venham muito mais capítulos.</p>
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.7-10.2-9.3C.4 9 1.2 5.6 4.1 4.2c2.3-1.1 4.9-.3 6.3 1.7l1.6 2.2 1.6-2.2c1.4-2 4-2.8 6.3-1.7 2.9 1.4 3.7 4.8 2.3 7.5C19.5 16.3 12 21 12 21z"/></svg>
+      <div class="sign serif" style="font-style:italic;">com todo o meu amor</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>2 anos e 9 meses — e contando</footer>
+
+<script>
+  // ambient starfield
+  (function(){
+    const wrap = document.getElementById('stars');
+    const count = window.innerWidth < 700 ? 60 : 110;
+    for(let i=0;i<count;i++){
+      const s = document.createElement('span');
+      const size = Math.random()*1.6 + 0.6;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.top = Math.random()*100 + '%';
+      s.style.left = Math.random()*100 + '%';
+      s.style.animationDelay = (Math.random()*5) + 's';
+      s.style.animationDuration = (4 + Math.random()*4) + 's';
+      wrap.appendChild(s);
+    }
+  })();
+
+  // scroll reveal
+  (function(){
+    const items = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    items.forEach(el => io.observe(el));
+  })();
+</script>
+
+</body>
+</html>
